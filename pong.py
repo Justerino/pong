@@ -86,32 +86,38 @@ def main():
 
     pygame.init()
 
+    # display screen and set caption
     screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Pong 2")
+    pygame.display.set_caption("Pong")
 
+    # initialize clock
     clock = pygame.time.Clock()
 
+    # establish starting points
     ball.center = (screen_width / 2, screen_height / 2)
-
     cpu.centery = screen_height / 2
-
     player.midright = (screen_width, screen_height / 2)
 
+    # set font
     score_font = pygame.font.Font(None, 100)
 
+    # declare necessary global variable in scope for controls
     global player_speed
 
+    # gameplay loop
     while True:
         # Check for events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            # while player holds down a key, provide speed to paddle
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     player_speed = -6
                 if event.key == pygame.K_DOWN:
                     player_speed = 6
+            # while player is not pressing key, stop movement on paddle
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     player_speed = 0
